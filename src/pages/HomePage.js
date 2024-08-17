@@ -19,9 +19,6 @@ const HomePage = () => {
                 <Typography variant="h3" gutterBottom>
                     Welcome to the Home Page
                 </Typography>
-                <Typography variant="h5">
-                    This is the main area of your application.
-                </Typography>
             </Box>
         </Container>
     );

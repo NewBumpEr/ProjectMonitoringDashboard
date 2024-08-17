@@ -35,13 +35,20 @@ const DashboardPage = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: 'calc(100vh - 64px)',
+                minHeight: '20vh',
                 px: 2,
                 py: 4,
+                background: '#4c6baf',
+                color: '#fff',
+                borderRadius: 2,
+                boxShadow: 3,
+                marginTop: 20,
+                marginBottom: 5,
             }}
         >
+
             <Typography variant="h3" component="h1" gutterBottom>
-                GitHub Dashboard
+                Dashboard
             </Typography>
 
             <Box sx={{ width: '100%', maxWidth: 800, mb: 4 }}>
