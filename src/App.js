@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage';
 import DashboardPage from './pages/DashboardPage';
 import NotFound from './components/NotFound';
 import RepoDetailsPage from './pages/RepoDetailsPage';
+import CommitDetailsPage from './pages/CommitDetailsPage';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<DashboardPage />} />
                     <Route path="/repo/:owner/:repo" element={<RepoDetailsPage />} />
+                    <Route path="/repo/:owner/:repo/commit/:commitSha" element={<CommitDetailsPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

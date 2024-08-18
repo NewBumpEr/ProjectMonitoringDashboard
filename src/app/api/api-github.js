@@ -60,6 +60,15 @@ export const fetchRepoCommits = async (owner, repo) => {
     }
 };
 
+export const fetchCommitDetails = async (owner, repo, commitSha) => {
+    try {
+        const response = await api.get(`/repos/${owner}/${repo}/commits/${commitSha}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error fetching commit details');
+    }
+};
+
 export const fetchAllStarEvents = async (owner, repo) => {
     const allEvents = [];
     let page = 1;

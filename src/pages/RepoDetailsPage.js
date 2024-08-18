@@ -8,6 +8,7 @@ import StarsOverTime from '../components/StarsOverTime';
 import LanguagesChart from '../components/LanguagesChart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import RecentCommits from '../components/RecentCommits';
 
 const RepoDetailsPage = () => {
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ const RepoDetailsPage = () => {
     const [error, setError] = useState(null);
     const [showLanguages, setShowLanguages] = useState(false);
     const [showStars, setShowStars] = useState(false);
+    const [showCommits, setShowCommits] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -127,15 +129,6 @@ const RepoDetailsPage = () => {
 
                 <Divider sx={{ my: 2 }} />
 
-                <Typography variant="body2" sx={{ mb: 2 }}>
-                    <strong>Open Pull Requests:</strong> {pullRequests.length}
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
-                    <strong>Open Issues:</strong> {repoData.open_issues_count}
-                </Typography>
-
-                <Divider sx={{ my: 2 }} />
-
                 <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
                     <Typography variant="body2">
                         <strong>Topics:</strong>
@@ -174,8 +167,24 @@ const RepoDetailsPage = () => {
                     </IconButton>
                 </Box>
                 <Collapse in={showStars}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                        <StarsOverTime repo={repo} owner={owner} />
+                    </Box>
+                </Collapse>
+
+                <Divider sx={{ my: 2 }} />
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography variant="body2">
+                        <strong>Recent Commits:</strong>
+                    </Typography>
+                    <IconButton onClick={() => setShowCommits(!showCommits)}>
+                        {showCommits ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    </IconButton>
+                </Box>
+                <Collapse in={showCommits}>
                     <Box sx={{ mt: 2 }}>
-                        <StarsOverTime owner={owner} repo={repo} />
+                        <RecentCommits commits={commits} owner={owner} repo={repo} />
                     </Box>
                 </Collapse>
             </CardContent>
