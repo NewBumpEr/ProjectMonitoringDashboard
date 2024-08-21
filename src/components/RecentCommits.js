@@ -1,37 +1,49 @@
 import React from 'react';
-import { Typography, Box, Divider, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
 
-const RecentCommits = ({ commits, owner, repo }) => {
-    const navigate = useNavigate();
+const RecentCommits = ({ commits = [], owner, repo }) => {
+    const recentCommits = commits.slice(0, 5);
+
+    if (recentCommits.length === 0) {
+        return <Typography>No recent commits</Typography>;
+    }
 
     return (
-        <Box sx={{ mb: 2 }}>
-            <Box sx={{ maxHeight: 400, overflowY: 'auto', border: '1px solid #ddd', borderRadius: 2, p: 2, backgroundColor: '#fafafa' }}>
-                {commits.slice(0, 5).map((commit, index) => (
-                    <Box key={index} sx={{ mb: 2 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
-                            {commit.commit.message}
-                        </Typography>
-                        <Typography variant="caption" color="textSecondary">
-                            by {commit.commit.author.name} on {format(new Date(commit.commit.author.date), 'dd MMMM yyyy')}
+        <>
+            {recentCommits.map(commit => {
+                const { sha, commit: { message, author } } = commit;
+                const formattedDate = format(new Date(author.date), 'dd MMM yyyy');
+
+                return (
+                    <Box key={sha} sx={{
+                        mb: 2,
+                        p: 2,
+                        border: '1px solid #ddd',
+                        borderRadius: 2,
+                        background: '#f9f9f9'
+                    }}>
+                        <Typography variant="h6">{message}</Typography>
+                        <Typography variant="body2" color="textSecondary">
+                            {`by ${author.name} on ${formattedDate}`}
                         </Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
                             <Button
-                                variant="outlined"
-                                size="small"
-                                onClick={() => navigate(`/repo/${owner}/${repo}/commit/${commit.sha}`)}
+                                component={Link}
+                                to={`/repo/${owner}/${repo}/commit/${sha}`}
+                                variant="contained"
+                                color="primary"
+                                sx={{ textTransform: 'none' }}
                             >
                                 View Commit
                             </Button>
                         </Box>
-                        <Divider sx={{ my: 1 }} />
                     </Box>
-                ))}
-            </Box>
-        </Box>
+                );
+            })}
+        </>
     );
 };
 
-export default RecentCommits;
+export default React.memo(RecentCommits);

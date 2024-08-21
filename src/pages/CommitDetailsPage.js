@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchCommitDetails } from '../app/api/api-github';
-import {CircularProgress, Typography, Card, CardContent, Box, Button, Divider, IconButton} from '@mui/material';
+import { CircularProgress, Typography, Card, CardContent, Box, Button, Divider, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 const CommitDetailsPage = () => {
@@ -24,25 +24,35 @@ const CommitDetailsPage = () => {
     }, [owner, repo, commitSha]);
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <Box sx={{ p: 2, display: 'flex', justifyContent: 'center' }}>
+                <Typography variant="h6" color="error">
+                    Error: {error}
+                </Typography>
+            </Box>
+        );
     }
 
     if (!commitDetails) {
-        return <CircularProgress />;
+        return (
+            <Box sx={{ p: 2, display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+            </Box>
+        );
     }
 
     return (
         <Card sx={{
             mt: 3,
-            p: 2,
-            background: '#fafafa',
+            p: 3,
+            background: '#f5f5f5',
             borderRadius: 4,
-            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1)',
             marginTop: 10,
             marginBottom: 3,
         }}>
             <CardContent>
-                <Box sx={{ mb: 2 }}>
+                <Box sx={{ mb: 3 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
                         <Button
                             variant="contained"
@@ -68,11 +78,11 @@ const CommitDetailsPage = () => {
                     <Divider sx={{ my: 2 }} />
                 </Box>
 
-                <Typography variant="body1" sx={{ mb: 2 }}>
+                <Typography variant="h6" sx={{ mb: 2 }}>
                     <strong>Commit:</strong> {commitDetails.sha}
                 </Typography>
 
-                <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                <Typography variant="body1" color="textSecondary" sx={{ mb: 2 }}>
                     <strong>Message:</strong> {commitDetails.commit.message}
                 </Typography>
 
@@ -87,11 +97,11 @@ const CommitDetailsPage = () => {
                 <Box sx={{ mb: 2 }}>
                     {commitDetails.files.length > 0 ? (
                         commitDetails.files.map((file, index) => (
-                            <Box key={index} sx={{ mb: 1, p: 1, border: '1px solid #ddd', borderRadius: 2, backgroundColor: '#f9f9f9' }}>
-                                <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+                            <Box key={index} sx={{ mb: 2, p: 2, border: '1px solid #ddd', borderRadius: 2, backgroundColor: '#ffffff', boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)' }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1 }}>
                                     {file.filename}
                                 </Typography>
-                                <Typography variant="caption" color="textSecondary" sx={{ mb: 0.5 }}>
+                                <Typography variant="caption" color="textSecondary" sx={{ mb: 1 }}>
                                     Changes: {file.changes} lines
                                 </Typography>
                                 <Typography variant="caption" color="textSecondary">

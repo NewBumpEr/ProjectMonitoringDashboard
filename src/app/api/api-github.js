@@ -99,3 +99,26 @@ export const fetchAllStarEvents = async (owner, repo) => {
 
     return allEvents;
 };
+
+export const fetchRepoReleases = async (owner, repo) => {
+    try {
+        const response = await api.get(`/repos/${owner}/${repo}/releases`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error fetching repository releases');
+    }
+};
+
+export const fetchRepoRelease = async (owner, repo, releaseId) => {
+    const url = `https://api.github.com/repos/${owner}/${repo}/releases/${releaseId}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Error fetching release data: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
