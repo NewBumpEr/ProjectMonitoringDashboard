@@ -1,5 +1,7 @@
 # Project Monitoring Dashboard
 
+## Version 1.0.4
+
 Welcome to the **Project Monitoring Dashboard**! This is a web application designed to help you monitor GitHub repositories. The application provides an intuitive interface for viewing and analyzing your repositories, making project management more streamlined and effective.
 
 This application is an excellent tool for understanding how to work with GitHub's API and participating in a collaborative software project.
