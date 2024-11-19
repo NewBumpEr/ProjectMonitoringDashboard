@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Paper, Link, Divider, Box } from '@mui/material';
+import {Container, Typography, Paper, Link, Divider, Box} from '@mui/material';
 
 const AboutPage = () => {
     return (
@@ -30,18 +30,22 @@ const AboutPage = () => {
                     About Project Monitoring Dashboard
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Project Monitoring Dashboard is an open-source web application designed to interact with GitHub repositories.
-                    It provides a user-friendly interface to view and analyze your repositories, making it easier to track project
+                    Project Monitoring Dashboard is an open-source web application designed to interact with GitHub
+                    repositories.
+                    It provides a user-friendly interface to view and analyze your repositories, making it easier to
+                    track project
                     progress and collaborate effectively.
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    As an open-source project, we welcome contributions from the community. Feel free to explore the code, report
-                    issues, and suggest improvements. This application is an excellent tool for understanding how to work with
+                    As an open-source project, we welcome contributions from the community. Feel free to explore the
+                    code, report
+                    issues, and suggest improvements. This application is an excellent tool for understanding how to
+                    work with
                     GitHub's API and participating in a collaborative software project.
                 </Typography>
             </Paper>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{my: 2}}/>
 
             <Paper
                 sx={{
@@ -67,7 +71,7 @@ const AboutPage = () => {
                 </Typography>
             </Paper>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{my: 2}}/>
 
             <Paper
                 sx={{
@@ -84,13 +88,21 @@ const AboutPage = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        flexDirection: {xs: 'column', sm: 'row'},
                     }}
                 >
-                    <Box sx={{ mr: 2 }}>
+                    <Box sx={{mb: {xs: 2, sm: 0}}}>
                         <img
                             src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                             alt="GitHub Mark"
-                            style={{ width: '100px', height: '100px' }}
+                            style={{
+                                width: '80px',
+                                height: '80px',
+                                '@media (max-width: 600px)': {
+                                    width: '60px',
+                                    height: '60px',
+                                },
+                            }}
                         />
                     </Box>
                     <Typography
@@ -114,11 +126,17 @@ const AboutPage = () => {
                         </Link>
                         , for providing the tools and platform to make our projects possible!
                     </Typography>
-                    <Box sx={{ ml: 2 }}>
+                    <Box sx={{mt: {xs: 2, sm: 0}}}>
                         <img
                             src="https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png"
                             alt="GitHub Logo"
-                            style={{ width: '150px', height: 'auto' }}
+                            style={{
+                                width: '130px',
+                                height: 'auto',
+                                '@media (max-width: 600px)': {
+                                    width: '100px',
+                                },
+                            }}
                         />
                     </Box>
                 </Box>
